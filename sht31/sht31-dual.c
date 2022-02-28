@@ -3,7 +3,7 @@
 // Magic numbers from
 // https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf
 //
-// Build with gcc sht31_dual.c -o sht31-dual-reader
+// Build with gcc sht31-dual.c -o sht31-dual-reader
 //
 // (C) 2022 C. Fernandez-Prades
 
@@ -41,6 +41,7 @@ static uint8_t SHT31_Crc(uint8_t *data, uint8_t nbrOfBytes)
     return crc;
 }
 
+
 void printHelp()
 {
     printf("Usage: sht31-dual-reader [OPTION]...\n");
@@ -48,6 +49,7 @@ void printHelp()
     printf("  -raw          Print temperature and Humidity in terminal without text.\n");
     printf("  -h, --help    Print this message and exit.\n");
 }
+
 
 void main(int argc, char **argv)
 {

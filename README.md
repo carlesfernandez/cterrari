@@ -187,8 +187,15 @@ Aviam si va:
 % ./sht31-dual-reader
 ```
 
+## Publicar dades al MQTT broker
 
-## Crontab
+Copiar scripts:
+
+```
+% sudo mkdir /scripts_raspberry/
+% sudo cp scripts_raspberry/llegir_sensor_dual.sh /scripts_raspberry/llegir_sensor_dual.sh
+% sudo cp scripts_raspberry/obtenir_dades_raspberry.sh /scripts_raspberry/obtenir_dades_raspberry.sh
+```
 
 Editar crontab:
 ```
