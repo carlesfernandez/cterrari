@@ -20,6 +20,10 @@
 #define POLYNOMIAL 0x131
 // P(x) = x^8 + x^5 + x^4 + 1 = 100110001
 
+#define I2C_DEVICE 0x44
+#define I2C_ADAPTER1 "/dev/i2c-1"
+#define I2C_ADAPTER2 "/dev/i2c-3"
+
 static uint8_t SHT31_Crc(uint8_t *data, uint8_t nbrOfBytes)
 {
     uint8_t bit;         // bit mask
@@ -66,7 +70,7 @@ void main(int argc, char **argv)
 
     // Create I2C bus for internal sensor
     int file;
-    char *bus = "/dev/i2c-1";
+    char *bus = I2C_ADAPTER1;
     if ((file = open(bus, O_RDWR)) < 0)
         {
             printf("Failed to open the bus for sensor 1 at /dev/i2c-1\n");
@@ -74,7 +78,7 @@ void main(int argc, char **argv)
         }
     // Create I2C bus for external sensor
     int file2;
-    char *bus2 = "/dev/i2c-3";
+    char *bus2 = I2C_ADAPTER2;
     if ((file2 = open(bus2, O_RDWR)) < 0)
         {
             printf("Failed to open the bus for sensor 2 at /dev/i2c-3\n");
@@ -83,12 +87,12 @@ void main(int argc, char **argv)
     // Get I2C devices, SHT31 I2C address is 0x44(68)
     if (sensor1_reading)
         {
-            ioctl(file, I2C_SLAVE, 0x44);
+            ioctl(file, I2C_SLAVE, I2C_DEVICE);
         }
 
     if (sensor2_reading)
         {
-            ioctl(file2, I2C_SLAVE, 0x44);
+            ioctl(file2, I2C_SLAVE, I2C_DEVICE);
         }
 
     // Send high repeatability measurement command
