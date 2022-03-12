@@ -1,0 +1,11 @@
+# See https://hub.docker.com/r/ebrianne/duckdns-go
+
+version: '3'
+services:
+  duckdns:
+    container_name: duckdns-go
+    image: ebrianne/duckdns-go:latest
+    restart: always
+    environment:
+      - DUCKDNS_DOMAINS=<MY_DOMAIN1,MY_DOMAIN2>
+      - DUCKDNS_TOKEN=<MY_DUCKDNS_TOKEN>

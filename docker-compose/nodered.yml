@@ -1,0 +1,15 @@
+# See https://hub.docker.com/r/nodered/node-red/
+
+version: '3'
+services:
+  nodered:
+    container_name: nodered
+    image: nodered/node-red:latest
+    volumes:
+      - /volume2/docker/nodered/data:/data
+    restart: always
+    user: "node-red"
+    ports:
+      - 6335:1880/tcp
+    environment:
+      - TZ=Europe/Madrid

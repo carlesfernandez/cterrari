@@ -1,0 +1,14 @@
+# See https://www.home-assistant.io/installation/linux#install-home-assistant-container
+
+version: '3'
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant:stable
+    volumes:
+      - /volume2/docker/homeassistant/config:/config
+    restart: always
+    privileged: true
+    network_mode: host
+    environment:
+      - TZ=Europe/Madrid

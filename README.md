@@ -19,7 +19,7 @@
 
 ## Instal·lar Docker
 
-A la Raspberry:
+A la Raspberry, instal·lar Docker:
 
 ```
 % curl -fsSL https://get.docker.com -o get-docker.sh
@@ -27,6 +27,41 @@ A la Raspberry:
 % sudo usermod -aG docker pi
 % sudo mkdir /docker
 % sudo chown pi /docker
+```
+
+i Docker Compose:
+
+```
+sudo apt-get install libffi-dev libssl-dev
+sudo apt install python3-dev
+sudo apt-get install -y python3 python3-pip
+sudo pip3 install docker-compose
+sudo systemctl enable docker
+```
+
+## Instal·lar gestor Docker
+
+Crear carpeta per dades permanents:
+
+```
+% mkdir /docker/portainer
+% mkdir /docker/portainer/data
+```
+
+Instal·lar Portainer:
+
+```
+% docker run -itd --name portainer --restart=always \
+    -p 9443:9443 -p 9000:9000 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /docker/portainer/data/:/data \
+    portainer/portainer-ce:latest
+```
+
+o bé:
+
+```
+docker-compose -f ./docker-compose/portainer.yml up -d
 ```
 
 ## Instal·lar MQTT broker
@@ -63,6 +98,12 @@ docker run -itd --name mosquitto --restart=always \
   -v /docker/mosquitto/data:/mosquitto/data \
   -v /docker/mosquitto/log:/mosquitto/log \
   eclipse-mosquitto
+```
+
+o bé:
+
+```
+docker-compose -f ./docker-compose/mosquitto.yml up -d
 ```
 
 ## Afegir port I2C per a un segon sensor (opcional)
@@ -134,30 +175,19 @@ Instal·lar NodeRED:
 % docker run -itd --name nodered --restart=always \
     -p 1880:1880 \
     -v /docker/nodered/data:/data \
-    -e TZ=Europe/Madrid
-    -e PGID=1000
-    -e PUID=1000
-    -u "1000:998"
+    -e TZ=Europe/Madrid \
+    -e PGID=1000 \
+    -e PUID=1000 \
+    -u "1000:998" \
+    --device=/dev/i2c-1:/dev/i2c-1 \
+    --device=/dev/i2c-3:/dev/i2c-3 \
     nodered/node-red:latest
 ```
 
-## Instal·lar gestor Docker
-
-Crear carpeta per dades permanents:
+o bé:
 
 ```
-% mkdir /docker/portainer
-% mkdir /docker/portainer/data
-```
-
-Instal·lar Portainer:
-
-```
-% docker run -itd --name portainer --restart=always \
-    -p 8000:8000 -p 9000:9000 \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /docker/portainer/data/:/data \
-    portainer/portainer-ce:latest
+docker-compose -f ./docker-compose/nodered-raspi.yml up -d
 ```
 
 ## Compilar software lector del sensor SHT31

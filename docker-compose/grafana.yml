@@ -1,0 +1,14 @@
+# See https://grafana.com/docs/grafana/latest/installation/docker/
+
+version: '3'
+services:
+  grafana:
+    container_name: grafana
+    image: "docker.io/grafana/grafana:latest"
+    volumes:
+      - /volume2/docker/grafana/var/lib/grafana/plugins:/var/lib/grafana/plugins
+      - /volume2/docker/grafana/var/lib/grafana:/var/lib/grafana
+    restart: always
+    user: "0"
+    ports:
+      - 3010:3000

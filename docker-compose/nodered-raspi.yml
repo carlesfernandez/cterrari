@@ -1,0 +1,19 @@
+# See https://hub.docker.com/r/nodered/node-red
+
+version: '3.3'
+services:
+    node-red:
+        container_name: nodered
+        restart: always
+        ports:
+            - '1880:1880'
+        volumes:
+            - '/docker/nodered/data:/data'
+        environment:
+            - TZ=Europe/Madrid
+            - PGID=1000
+            - PUID=1000
+        devices:
+            - '/dev/i2c-1:/dev/i2c-1'
+            - '/dev/i2c-3:/dev/i2c-3'
+        image: 'nodered/node-red:latest'
