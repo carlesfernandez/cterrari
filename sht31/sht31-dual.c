@@ -144,7 +144,7 @@ void main(int argc, char **argv)
     uint8_t crc_hum = SHT31_Crc(&data[3], 2);
     uint8_t crc_hum2 = SHT31_Crc(&data2[3], 2);
 
-    if (argc < 2)  // no arguments were passed)
+    if (argc < 2)  // no arguments were passed
         {
             if (sensor1_reading)
                 {
