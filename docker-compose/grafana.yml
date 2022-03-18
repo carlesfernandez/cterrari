@@ -6,9 +6,10 @@ services:
     container_name: grafana
     image: "docker.io/grafana/grafana:latest"
     volumes:
-      - /volume2/docker/grafana/var/lib/grafana/plugins:/var/lib/grafana/plugins
       - /volume2/docker/grafana/var/lib/grafana:/var/lib/grafana
     restart: always
     user: "0"
     ports:
       - 3010:3000
+    environment:
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
