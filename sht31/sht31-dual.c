@@ -117,12 +117,18 @@ void main(int argc, char **argv)
     char data2[6] = {0};
     if (sensor1_reading && read(file, data, 6) != 6)
         {
-            printf("Input/output error in sensor 1.\n");
+            if (argc == 1 || (argc == 2 && strcmp("-raw", argv[1]) != 0))
+                {
+                    printf("Input/output error in sensor 1.\n");
+                }
             sensor1_reading = false;
         }
     if (sensor2_reading && read(file2, data2, 6) != 6)
         {
-            printf("Input/output error in sensor 2.\n");
+            if (argc == 1 || (argc == 2 && strcmp("-raw", argv[1]) != 0))
+                {
+                    printf("Input/output error in sensor 2.\n");
+                }
             sensor2_reading = false;
         }
 
