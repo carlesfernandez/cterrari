@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  linuxserver:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    ports:
+      - 8200:8200
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Madrid
+    volumes:
+      - "/volume2/docker/duplicati/config:/config"
+      - "/volume2/docker/duplicati/backups:/backups"
+      - "/volume2/docker:/source"
+    restart: always

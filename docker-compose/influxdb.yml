@@ -1,10 +1,11 @@
 # See https://hub.docker.com/_/influxdb
 
-version: '3'
+version: "3"
+
 services:
   influxdb:
+    image: influxdb::2.4
     container_name: influxdb
-    image: influxdb:latest
     volumes:
       - /volume2/docker/influxdb/etc/influxdb2:/etc/influxdb2
       - /volume2/docker/influxdb/var/lib/influxdb2:/var/lib/influxdb2
@@ -12,19 +13,28 @@ services:
     ports:
       - 8086:8086/tcp
       - 2003:2003/tcp
-      
+    environment:
+      - DOCKER_INFLUXDB_INIT_USERNAME="<MY_USERNAME>"
+      - DOCKER_INFLUXDB_INIT_PASSWORD="<MY_PASSWORD>"
+      - DOCKER_INFLUXDB_INIT_ORG="<MY_ORG>"
+      - DOCKER_INFLUXDB_INIT_BUCKET="<MY_INIT_BUCKET>"
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN="<MY_TOKEN>"
+
   telegraf:
-    image: telegraf:latest 
+    image: telegraf:1.24
     container_name: telegraf
     restart: always
-    links: 
-      - influxdb 
+    links:
+      - influxdb
     volumes:
       - /volume2/docker/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     environment:
-      - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=<MY_USERNAME>
       - DOCKER_INFLUXDB_INIT_PASSWORD=<MY_PASSWORD>
       - DOCKER_INFLUXDB_INIT_ORG=<MY_ORG>
       - DOCKER_INFLUXDB_INIT_BUCKET=<MY_INIT_BUCKET>
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN="<MY_TOKEN>"
+      - INFLUX_TOKEN="<MY_TOKEN>"
+      - INFLUX_ORG="Casa"
+      - INFLUX_BUCKET=<MY_INIT_BUCKET>
+      - INFLUX_HOST="http://<MY_IP_ADDRESS>:8086"

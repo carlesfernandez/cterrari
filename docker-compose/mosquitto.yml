@@ -1,8 +1,10 @@
 # See https://hub.docker.com/_/eclipse-mosquitto
 
-version: '3.3'
+version: "3.3"
+
 services:
   eclipse-mosquitto:
+    image: eclipse-mosquitto:2.0
     container_name: mosquitto
     restart: always
     ports:
@@ -12,4 +14,3 @@ services:
       - /docker/mosquitto/config:/mosquitto/config
       - /docker/mosquitto/data:/mosquitto/data
       - /docker/mosquitto/log:/mosquitto/log
-    image: eclipse-mosquitto:latest

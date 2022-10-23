@@ -1,6 +1,7 @@
 # See https://hub.docker.com/r/nodered/node-red/
 
-version: '3'
+version: "3"
+
 services:
   nodered:
     container_name: nodered

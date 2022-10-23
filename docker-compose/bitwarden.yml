@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  server:
+    image: vaultwarden/server:latest
+    container_name: bitwarden
+    ports:
+      - "3012:3012"
+      - "5151:80"
+    volumes:
+      - "/volume2/docker/bitwarden:/data"
+    restart: always

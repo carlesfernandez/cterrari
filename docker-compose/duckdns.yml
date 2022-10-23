@@ -1,6 +1,7 @@
 # See https://hub.docker.com/r/ebrianne/duckdns-go
 
-version: '3'
+version: "3"
+
 services:
   duckdns:
     container_name: duckdns-go
