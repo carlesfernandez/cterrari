@@ -4,7 +4,7 @@ version: "3"
 
 services:
   influxdb:
-    image: influxdb::2.4
+    image: influxdb:2.4
     container_name: influxdb
     volumes:
       - /volume2/docker/influxdb/etc/influxdb2:/etc/influxdb2
